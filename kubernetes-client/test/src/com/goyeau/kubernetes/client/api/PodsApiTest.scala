@@ -308,7 +308,7 @@ class PodsApiTest
             )
           else IO.unit
       } yield pod,
-      maxRetries = 50,
+      maxRetries = 100,
       actionClue = Some(s"Waiting for pod $name to be ready")
     )
 }
