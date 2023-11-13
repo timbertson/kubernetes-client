@@ -16,7 +16,7 @@ import munit.FunSuite
 import org.http4s.Status
 import org.typelevel.log4cats.Logger
 import org.typelevel.log4cats.slf4j.Slf4jLogger
-
+import io.circe.syntax.*
 import java.nio.file.Files as JFiles
 import scala.util.Random
 
@@ -301,7 +301,11 @@ class PodsApiTest
         statusCount = pod.status.flatMap(_.conditions.map(_.length)).getOrElse(0)
         _ <-
           if (notStarted || statusCount != podStatusCount)
-            IO.raiseError(new RuntimeException("Pod is not started"))
+            IO.raiseError(
+              new RuntimeException(
+                s"Pod is not started: ${pod.status.flatMap(_.conditions).toSeq.flatten.map(_.asJson.noSpaces).mkString(", ")}"
+              )
+            )
           else IO.unit
       } yield pod,
       maxRetries = 50,
