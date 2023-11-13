@@ -72,15 +72,6 @@ class PodsApiTest
         }
       )
       .some
-//      PodSpec(
-//        containers = Seq(
-//          Container(
-//            "test",
-//            image = Option("alpine"),
-//            command = Option(Seq("sh", "-c", "tail -f /dev/null"))
-//          )
-//        )
-//      )
   )
 
   def testPodWithLogs(podName: String, labels: Map[String, String] = Map.empty): Pod = Pod(
@@ -100,21 +91,6 @@ class PodsApiTest
         }
       )
       .some
-//      PodSpec(
-//        containers = Seq(
-//          Container(
-//            "test",
-//            image = Option("alpine"),
-//            command = Option(
-//              Seq(
-//                "sh",
-//                "-c",
-//                "echo line 1; sleep 1; echo line 2; sleep 2; echo line 3; echo line 4; echo line 5; echo line 6"
-//              )
-//            )
-//          )
-//        )
-//      )
   )
 
   private val successStatus = Some(Right(v1.Status(status = Some("Success"), metadata = Some(ListMeta()))))
